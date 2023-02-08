@@ -6,7 +6,7 @@ const app = express();
 const port = 3000;
 app.use(bodyParser.json());
 
-const configuration = new Configuration({apiKey: "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"});
+const configuration = new Configuration({apiKey:  process.env.OPENAI_API_KEY });
 const openai = new OpenAIApi(configuration);
 
 
