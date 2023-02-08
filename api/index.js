@@ -16,7 +16,7 @@ app.get('/api', (req, res) => {
     res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
   });
 
-app.post("/question", async (req, res) => {
+app.post("/api/question", async (req, res) => {
     const { prompt } = req.body;
     console.info(prompt)
     const response = await openai.createCompletion({
