@@ -9,6 +9,13 @@ app.use(bodyParser.json());
 const configuration = new Configuration({apiKey: "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"});
 const openai = new OpenAIApi(configuration);
 
+app.get('/api', (req, res) => {
+    const path = `/api/item/v4`;
+    res.setHeader('Content-Type', 'text/html');
+    res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
+    res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
+  });
+
 app.post("/question", async (req, res) => {
     const { prompt } = req.body;
     console.info(prompt)
