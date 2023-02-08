@@ -3,7 +3,7 @@ const {Configuration, OpenAIApi} = require("openai");
 const bodyParser = require("body-parser");
 
 const app = express();
-const port = 3000;
+const port = 3006;
 app.use(bodyParser.json());
 
 const configuration = new Configuration({apiKey:  process.env.OPENAI_API_KEY });
