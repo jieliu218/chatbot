@@ -6,13 +6,14 @@ const app = express();
 const port = 3000;
 app.use(bodyParser.json());
 
-const configuration = new Configuration({apiKey: "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"});
+const configuration = new Configuration({apiKey:  process.env.OPENAI_API_KEY });
 const openai = new OpenAIApi(configuration);
 
 
 app.post("/api/question", async (req, res) => {
     const { prompt } = req.body;
     console.info(prompt)
+    console.info('model: "text-davinci-003"')
     const response = await openai.createCompletion({
         model: "text-davinci-003",
         prompt,
@@ -25,13 +26,6 @@ app.post("/api/question", async (req, res) => {
     console.info(response.data)
     res.json(response.data)
 });
-
-app.get('/api', (req, res) => {
-    const path = `/api/item/v4`;
-    res.setHeader('Content-Type', 'text/html');
-    res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
-    res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
-  });
 
 
 app.listen(port, () => {
