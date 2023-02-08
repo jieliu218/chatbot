@@ -9,12 +9,6 @@ app.use(bodyParser.json());
 const configuration = new Configuration({apiKey: "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"});
 const openai = new OpenAIApi(configuration);
 
-app.get('/api', (req, res) => {
-    const path = `/api/item/v4`;
-    res.setHeader('Content-Type', 'text/html');
-    res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
-    res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
-  });
 
 app.post("/api/question", async (req, res) => {
     const { prompt } = req.body;
@@ -31,6 +25,14 @@ app.post("/api/question", async (req, res) => {
     console.info(response.data)
     res.json(response.data)
 });
+
+app.get('/api', (req, res) => {
+    const path = `/api/item/v4`;
+    res.setHeader('Content-Type', 'text/html');
+    res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
+    res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
+  });
+
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
