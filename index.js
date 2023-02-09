@@ -11,12 +11,13 @@ const openai = new OpenAIApi(configuration);
 
 
 app.post("/api/question", async (req, res) => {
-    const { prompt } = req.body;
+    const { prompt, model } = req.body;
     console.info(prompt)
+    console.info('model', model)
     console.info('model: "text-davinci-003"')
     const response = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt,
+        model: !!model ? model : "text-davinci-003",
+        prompt: prompt + "\n\n###\n\n",
         temperature: 0.7,
         max_tokens: 256,
         top_p: 1,
